@@ -4,145 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>soon..</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ff3;
-            color: #366;
+        * {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* لمنع تمرير الصفحة */
-            background: url('Lahcen.png') no-repeat center center;
-            background-size: cover;
-            background-attachment: fixed;
-
+            box-sizing: border-box;
         }
 
-        /* تثبيت الشريط العلوي مع شفافية */
-header {
+        body {
+            font-family: Arial, sans-serif;
+            background: url('Lahcen.png') no-repeat center center;
+            background-size: cover;
+            color: #366;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* ✅ الشريط العلوي (Header) */
+        header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(34, 34, 34, 0.8); /* خلفية شفافة بنسبة 80% */
+            background: rgba(34, 34, 34, 0.8);
             color: #ff0;
             padding: 10px 0;
-            text-align: center;
-            box-shadow: 0 4px 10px #0400dc; /* ظل خفيف */
+            box-shadow: 0 4px 10px #0400dc;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
             z-index: 1000;
-            backdrop-filter: blur(5px); /* تأثير ضبابي خفيف للخلفية */
         }
 
-        /* لضمان عدم تداخل المحتوى مع الشريط العلوي */
-        body {
-    padding-top: 60px;
-}
-
         .logo {
-            position: absolute;
-            left: 25px;
-            top: 5px;
-            height: 40px; /* ارتفاع اللوغو */
-            width: 40px; /* عرض اللوغو */
-            border-radius: 50%; /* شكل دائري */
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.5s; /* تأثير عند وضع الفأرة */
+            transition: transform 0.3s;
         }
 
         .logo:hover {
-            transform: scale(1.1); /* تكبير اللوغو عند التحويم */
+            transform: scale(1.1);
         }
 
+        /* ✅ الأزرار الرئيسية */
         nav {
-            margin: 10px 0; /* تقليل المسافة بين العناصر */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        nav {
-    margin: 10px 0; /* تقليل المسافة بين العناصر */
-}
+        nav button {
+            background: #333;
+            color: #ff0;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
 
-nav button {
-    background: #333;
-    color: #0400dc;
-    border: none;
-    padding: 10px 20px; /* تقليل الحشوة */
-    margin: 5px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    font-size: 17px; /* تقليل حجم الخط */
-}
+        nav button:hover {
+            background: #0400dc;
+            color: white;
+        }
 
-.section {
-    display: none;
-    padding: 20px;
-    transition: opacity 0.5s ease-in-out;
-}
-
+        /* ✅ الأقسام الرئيسية */
+        .section {
+            display: none;
+            padding: 20px;
+            transition: opacity 0.5s ease-in-out;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         .section.active {
-            display: block;
-            opacity: 1;
-        }
-
-        h2 {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7); 
-            margin-bottom: 20px;
-        }
-        h1 {
-           text-align: center;
-           color:rgb(255, 255, 255); 
-           margin-bottom: 20px;
-        }
-
-       h3 {
-            text-align: center;
-            color:rgb(232, 210, 210); 
-            margin-bottom: 40px;
+            display: flex;
         }
 
         .main-background {
-            background: url('background.jpg') no-repeat center center; /* خلفية يمكن تغييرها */
+            background: url('background.jpg') no-repeat center center;
             background-size: cover;
-            padding: 40px 0; /* إضافة مساحة حول المحتوى */
-            position: relative;
-         }
-        
-        .snowflake {
-            position: absolute;
-            color: #0400dc;
-            font-size: 1em;
-            opacity: 0.8;
-            animation: fall linear infinite;
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
-        }
-
+        /* ✅ بطاقات المحتوى */
         .card-container {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             justify-content: center;
+            width: 100%;
+            max-width: 1200px;
         }
 
         .card {
             background: #222;
-            color: #0400dc;
-            width: calc(33% - 20px);
+            color: #ff0;
             border-radius: 15px;
-            position: relative;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: 0.3s;
             box-shadow: 0 2px 8px #0400dc;
+            text-align: center;
         }
 
         .card img {
@@ -158,201 +127,124 @@ nav button {
 
         .card p {
             padding: 15px;
-            text-align: center;
         }
 
-        .card-title {
-            font-weight: bold;
-            font-size: 18px;
-            margin: 10px 0;
-        }
-                
+        /* ✅ الفوتر (Footer) */
         footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 98%;
-    background: #000;
-    color: #0400dc;
-    text-align: center;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000; /* ضمان بقاء الفوتر فوق كل العناصر */
-    background-color: rgba(34, 34, 34, 0.8); /* خلفية شفافة بنسبة 80% */
-    box-shadow: 0 4px 10px #0400dc; /* ظل خفيف */
-}
-
-
-
-        .settings {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(34, 34, 34, 0.8);
+            color: #ff0;
+            text-align: center;
+            padding: 10px;
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-        }
-
-        .settings div {
-            cursor: pointer;
-            font-size: 20px;
-            margin: 5px 0;
-            color: #0400dc;
-            transition: color 0.3s;
-        }
-
-        .settings div:hover {
-            color: #0400dc;
-        }
-
-        .social-icons {
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: flex-end;
         }
 
         .social-icons a {
-            color:rgb(255, 255, 255);
+            color: white;
             margin: 0 10px;
-            font-size: 20px;
-            transition: color 0.3s;
+            font-size: 18px;
+            transition: 0.3s;
         }
 
         .social-icons a:hover {
             color: #0400dc;
         }
 
-        .footer-text {
-            flex-grow: 1;
-            text-align: center;
+        /* ✅ تحسين تجربة الاستخدام على الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .card-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- ✅ الشريط العلوي -->
     <header>
-        <img src="Interpol Aflou.png" alt="لوغو" class="logo" onclick="showSection('main')"> <!-- لوغو -->
+        <img src="Interpol Aflou.png" alt="لوغو" class="logo" onclick="showSection('main')">
         <nav>
             <button onclick="showSection('main')"><i class="fas fa-home"></i> الرئيسية</button>
             <button onclick="showSection('home')"><i class="fas fa-newspaper"></i> أخبار</button>
             <button onclick="showSection('videos')"><i class="fas fa-video"></i> فيديوهات</button>
             <button onclick="showSection('images')"><i class="fas fa-image"></i> صور</button>
-            <button onclick="showSection('results')"><i class="fas fa-trophy"></i> soon..</button>
+            <button onclick="showSection('results')"><i class="fas fa-trophy"></i> قريبًا..</button>
         </nav>
-        
-        </div>
     </header>
-    
+
+    <!-- ✅ الأقسام -->
     <main>
         <section id="main" class="section active main-background">
-            <div class="main-content">
-                
-            <div class="main-content">
-                <h1>رئيسية</h1>
-                <h3 class="main-description">WELCOME BACK </h3>
-                
-                <div class="card-container">
-                    <div class="card">
-                        <img src="interpol.png" alt="صورة 1">
-                        <p class="card-title">Lahcen Picasso</p>
-                    </div>
-
+            <h1>رئيسية</h1>
+            <h3>WELCOME BACK</h3>
+            <div class="card-container">
+                <div class="card">
+                    <img src="interpol.png" alt="Lahcen Picasso">
+                    <p>Lahcen Picasso</p>
                 </div>
             </div>
-            <div class="snow" id="snowContainer"></div>
         </section>
 
         <section id="home" class="section">
             <h1>أخبار</h1>
-            <div class="card-container" id="newsContainer">
-                <!-- بطاقات الأخبار -->
+            <div class="card-container">
                 <div class="card">
                     <img src="Interpol Aflou.png" alt="خبر 1">
-                    <p class="card-title">Picasso Web📉</p>
+                    <p>Picasso Web📉</p>
                 </div>
-                
             </div>
         </section>
 
         <section id="videos" class="section">
             <h1>فيديوهات</h1>
-            <div class="card-container" id="videoContainer">
-                <!-- بطاقات الفيديو -->
-                <div class="card">
-                    <a href="قران كريم.mp4" target="_blank">
-                        <img src="....png" alt="فيديو 1">
-                        <p class="card-title"></p>
-                    </a>
-                </div>
-          
-            </div>
-        </section>
-
-        <section id="images" class="section">
-            <h1>صور</h1>
             <div class="card-container">
-               
                 <div class="card">
-                    <img src="Interpol Aflou.png" alt="صورة 2">
-                    <p>picasso</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="results" class="section">
-            <h1>sooon..</h1>
-            <div class="card-container">
-            
-                <div class="card">
-                    <img src="Interpol Aflou.png" alt="">
-                    <p>picasso</p>
+                    <img src="video.png" alt="فيديو">
+                    <p>فيديوهات جديدة قريبًا</p>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- ✅ الفوتر -->
     <footer>
-        <div class="footer-text">حقوق الطبع والنشر © 2024جميع الحقوق محفوظة | developer by: H29</div>
-        <img src="Interpol Aflou.png" alt="Logo" class="logo">
+        <div>© 2024 جميع الحقوق محفوظة | H29</div>
         <div class="social-icons">
-            <a href="https://www.instagram.com/omg.h29/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/interpol.h29" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.tiktok.com/@hassone_picasso" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="https://discord.gg/3NqUTUnpqT" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
         </div>
     </footer>
 
     <script>
-        let snowActive = true;
-        let snowflakes = [];
-        let snowSpeed = 5;
-        let snowSize = 20;
-
         function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
+            document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
             document.getElementById(sectionId).classList.add('active');
         }
-
-    
-
-document.addEventListener("wheel", function (event) {
-    event.preventDefault(); // منع السلوك الافتراضي للتمرير
-
-    let scrollSpeed = 100; // تعديل سرعة التمرير
-    let delta = event.deltaY > 0 ? scrollSpeed : -scrollSpeed;
-
-    window.scrollBy({
-        top: delta,
-        behavior: "smooth", // يجعل التمرير سلسًا
-    });
-}, { passive: false });
-
-
-        createSnowflakes();
     </script>
+
 </body>
 </html>
+
