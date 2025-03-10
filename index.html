@@ -17,41 +17,34 @@
             background: url('Lahcen.png') no-repeat center center;
             background-size: cover;
             color: #366;
-            overflow-x: hidden;
             text-align: center;
+            overflow-x: hidden;
         }
 
         /* ✅ الشريط العلوي (Header) */
         header {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            background: rgba(34, 34, 34, 0.8);
+            background: rgba(34, 34, 34, 0.9);
             color: #ff0;
-            padding: 10px 0;
+            padding: 10px;
             box-shadow: 0 4px 10px #0400dc;
             backdrop-filter: blur(5px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
             z-index: 1000;
         }
 
         .logo {
-            height: 40px;
-            width: 40px;
+            height: 35px;
+            width: 35px;
             border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.3s;
         }
 
-        .logo:hover {
-            transform: scale(1.1);
-        }
-
-        /* ✅ الأزرار الرئيسية */
+        /* ✅ قائمة التنقل (للشاشات الصغيرة تتحول إلى قائمة جانبية) */
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -62,11 +55,11 @@
             background: #333;
             color: #ff0;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 7px 12px;
+            border-radius: 15px;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         nav button:hover {
@@ -78,7 +71,6 @@
         .section {
             display: none;
             padding: 20px;
-            transition: opacity 0.5s ease-in-out;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -97,8 +89,8 @@
         /* ✅ بطاقات المحتوى */
         .card-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
             justify-content: center;
             width: 100%;
             max-width: 1200px;
@@ -107,26 +99,25 @@
         .card {
             background: #222;
             color: #ff0;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
             transition: 0.3s;
-            box-shadow: 0 2px 8px #0400dc;
+            box-shadow: 0 2px 6px #0400dc;
             text-align: center;
         }
 
         .card img {
             width: 100%;
             height: auto;
-            border-radius: 15px 15px 0 0;
+            border-radius: 10px 10px 0 0;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px #0400dc;
+            transform: scale(1.03);
         }
 
         .card p {
-            padding: 15px;
+            padding: 10px;
         }
 
         /* ✅ الفوتر (Footer) */
@@ -134,10 +125,10 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: rgba(34, 34, 34, 0.8);
+            background: rgba(34, 34, 34, 0.9);
             color: #ff0;
             text-align: center;
-            padding: 10px;
+            padding: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -145,8 +136,8 @@
 
         .social-icons a {
             color: white;
-            margin: 0 10px;
-            font-size: 18px;
+            margin: 0 8px;
+            font-size: 16px;
             transition: 0.3s;
         }
 
@@ -154,10 +145,11 @@
             color: #0400dc;
         }
 
-        /* ✅ تحسين تجربة الاستخدام على الشاشات الصغيرة */
+        /* ✅ تحسين العرض على الشاشات الصغيرة */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
+                padding: 10px;
                 text-align: center;
             }
 
@@ -166,13 +158,20 @@
                 gap: 5px;
             }
 
+            nav button {
+                font-size: 12px;
+                padding: 6px 10px;
+                width: 90%;
+            }
+
             .card-container {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                grid-template-columns: 1fr;
+                padding: 10px;
             }
 
             footer {
                 flex-direction: column;
-                gap: 10px;
+                gap: 5px;
             }
         }
     </style>
@@ -194,7 +193,7 @@
     <!-- ✅ الأقسام -->
     <main>
         <section id="main" class="section active main-background">
-            <h1>رئيسية</h1>
+            <h1>الرئيسية</h1>
             <h3>WELCOME BACK</h3>
             <div class="card-container">
                 <div class="card">
@@ -247,4 +246,3 @@
 
 </body>
 </html>
-
