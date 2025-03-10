@@ -140,9 +140,16 @@
         }
 
         .menu-toggle {
-            display: none;
-            font-size: 40px;
-            cursor: pointer;
+    display: block; /* اجعلها مرئية */
+    font-size: 30px; /* ضبط الحجم ليكون مناسباً */
+    cursor: pointer;
+    position: fixed; /* تثبيتها في الزاوية */
+    top: 15px; /* تحديد المسافة من الأعلى */
+    right: 15px; /* تحديد المسافة من اليمين */
+    z-index: 1000; /* جعلها فوق باقي العناصر */
+    background: rgba(34, 34, 34, 0.8); /* إضافة خلفية */
+    padding: 10px; /* تحسين المظهر */
+    border-radius: 8px; /* زوايا دائرية */
         }
 
         .mobile-nav {
