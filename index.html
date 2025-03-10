@@ -179,18 +179,20 @@
         }
 
         footer {
-            display: flex;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(34, 34, 34, 0.8);
-            color: #0400dc;
-            text-align: center;
-            padding: 15px;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 10px #0400dc;
+    display: flex;
+    flex-wrap: wrap; /* السماح للعناصر بالتفاف في حال الحاجة */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(34, 34, 34, 0.8);
+    color: #0400dc;
+    text-align: center;
+    padding: 15px 20px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px #0400dc;
+}
         }
 
         .social-icons {
@@ -251,6 +253,22 @@
         }
 
         @media screen and (max-width: 768px) {
+                
+                    footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .footer-text {
+        margin-bottom: 10px;
+    }
+
+    .social-icons {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
             nav {
                 display: none;
             }
