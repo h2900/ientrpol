@@ -79,7 +79,7 @@
             z-index: 1000; 
         }
 
-        .card-container {
+.card-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
@@ -106,6 +106,76 @@
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 4px 15px #0400dc;
+        }
+
+                .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* تصميم البطاقات */
+        .card {
+            background: #222;
+            color: #0400dc;
+            width: calc(33% - 20px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px #0400dc;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* تصميم الصور داخل البطاقات */
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px 15px 0 0;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* عند تمرير الفأرة فوق البطاقة */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px #0400dc;
+        }
+
+        /* شاشة العرض الكاملة للصورة */
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        /* الصورة المكبرة */
+        .fullscreen img {
+            width: 90%;
+            height: auto;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* زر الإغلاق */
+        .fullscreen::after {
+            content: "✖";
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
         }
 
         footer {
