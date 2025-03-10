@@ -12,7 +12,6 @@
             color: #366;
             margin: 0;
             padding: 0;
-            overflow: hidden;
             background: url('Lahcen.png') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
@@ -30,16 +29,13 @@
             box-shadow: 0 4px 10px #0400dc;
             z-index: 1000;
             backdrop-filter: blur(5px);
-        }
-
-        body {
-            padding-top: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
         }
 
         .logo {
-            position: absolute;
-            left: 25px;
-            top: 5px;
             height: 40px;
             width: 40px;
             border-radius: 50%;
@@ -52,19 +48,19 @@
         }
 
         nav {
-            margin: 10px 0;
+            display: flex;
         }
 
         nav button {
             background: #333;
             color: #0400dc;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             margin: 5px;
             border-radius: 25px;
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
-            font-size: 17px;
+            font-size: 16px;
         }
 
         .section {
@@ -80,14 +76,7 @@
 
         h1, h2, h3 {
             text-align: center;
-            color: white;
-        }
-
-        .main-background {
-            background: url('background.jpg') no-repeat center center;
-            background-size: cover;
-            padding: 40px 0;
-            position: relative;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .card-container {
@@ -102,10 +91,10 @@
             color: #0400dc;
             width: calc(33% - 20px);
             border-radius: 15px;
-            position: relative;
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 2px 8px #0400dc;
+            text-align: center;
         }
 
         .card img {
@@ -123,21 +112,24 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 98%;
-            background: #000;
+            width: 100%;
+            background: rgba(34, 34, 34, 0.8);
             color: #0400dc;
             text-align: center;
             padding: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            z-index: 1000;
-            background-color: rgba(34, 34, 34, 0.8);
             box-shadow: 0 4px 10px #0400dc;
         }
 
+        .social-icons {
+            display: flex;
+            align-items: center;
+        }
+
         .social-icons a {
-            color: rgb(255, 255, 255);
+            color: white;
             margin: 0 10px;
             font-size: 20px;
             transition: color 0.3s;
@@ -147,41 +139,50 @@
             color: #0400dc;
         }
 
-        .footer-text {
-            flex-grow: 1;
-            text-align: center;
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
         }
 
-        /* تصميم خاص للهواتف */
-        @media (max-width: 768px) {
-            body {
-                background-size: cover;
-            }
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background: rgba(34, 34, 34, 0.9);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 10px #0400dc;
+        }
 
-            header {
-                padding: 10px;
-            }
+        .mobile-nav button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-            .logo {
-                height: 35px;
-                width: 35px;
-            }
+        .mobile-nav button:hover {
+            background: #0400dc;
+        }
 
+        @media screen and (max-width: 768px) {
             nav {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+                display: none;
             }
 
-            nav button {
-                width: 90%;
-                padding: 12px;
-                font-size: 16px;
+            .menu-toggle {
+                display: block;
             }
 
-            .card-container {
-                flex-direction: column;
-                align-items: center;
+            .mobile-nav.active {
+                display: block;
             }
 
             .card {
@@ -191,15 +192,15 @@
             footer {
                 flex-direction: column;
                 text-align: center;
+                padding: 10px;
+            }
+
+            .footer-text {
+                margin-bottom: 10px;
             }
 
             .social-icons {
                 justify-content: center;
-            }
-
-            .footer-text {
-                font-size: 14px;
-                margin-bottom: 10px;
             }
         }
     </style>
@@ -207,6 +208,9 @@
 <body>
     <header>
         <img src="Interpol Aflou.png" alt="لوغو" class="logo" onclick="showSection('main')">
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
         <nav>
             <button onclick="showSection('main')"><i class="fas fa-home"></i> الرئيسية</button>
             <button onclick="showSection('home')"><i class="fas fa-newspaper"></i> أخبار</button>
@@ -214,41 +218,39 @@
             <button onclick="showSection('images')"><i class="fas fa-image"></i> صور</button>
             <button onclick="showSection('results')"><i class="fas fa-trophy"></i> soon..</button>
         </nav>
+        <div class="mobile-nav" id="mobileNav">
+            <button onclick="showSection('main')">🏠 الرئيسية</button>
+            <button onclick="showSection('home')">📰 أخبار</button>
+            <button onclick="showSection('videos')">🎥 فيديوهات</button>
+            <button onclick="showSection('images')">🖼️ صور</button>
+            <button onclick="showSection('results')">🏆 soon..</button>
+        </div>
     </header>
 
     <main>
-        <section id="main" class="section active main-background">
-            <h1>رئيسية</h1>
-            <h3>WELCOME BACK</h3>
-        </section>
-
-        <section id="home" class="section">
-            <h1>أخبار</h1>
-        </section>
-
-        <section id="videos" class="section">
-            <h1>فيديوهات</h1>
-        </section>
-
-        <section id="images" class="section">
-            <h1>صور</h1>
-        </section>
-
-        <section id="results" class="section">
-            <h1>soon..</h1>
+        <section id="main" class="section active">
+            <h1>الرئيسية</h1>
         </section>
     </main>
 
     <footer>
-        <div class="footer-text">حقوق الطبع والنشر © 2024 جميع الحقوق محفوظة | Developer: H29</div>
+        <div class="footer-text">حقوق الطبع والنشر © 2024 جميع الحقوق محفوظة | developer by: H29</div>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/omg.h29/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/interpol.h29" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.tiktok.com/@hassone_picasso" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://discord.gg/3NqUTUnpqT" target="_blank"><i class="fab fa-discord"></i></a>
+        </div>
     </footer>
 
     <script>
         function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
+        }
+
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
         }
     </script>
 </body>
