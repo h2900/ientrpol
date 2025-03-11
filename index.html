@@ -33,7 +33,12 @@
             align-items: center;
             padding: 10px 15px;
             justify-content: center;
+            <img src="logo-name.png" alt="Role Play Logo" class="header-logo">
         }
+
+        .header-logo {
+            display: none; /* تخفي الصورة بشكل افتراضي */
+         }
 
         .logo {
             height: 40px;
@@ -268,6 +273,15 @@
     .social-icons {
         justify-content: center;
         margin-top: 10px;
+    }
+
+     .header-logo {
+        display: block; /* تظهر الصورة في الشاشات الكبيرة فقط */
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px; /* حجم الصورة */
     }
 
             nav {
