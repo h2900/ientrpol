@@ -301,14 +301,12 @@
     }
 }
 
-@keyframes moveText {
-    from {
-        transform: translateX(-15px);
-    }
-    to {
-        transform: translateX(15px);
-    }
-}
+     body {
+    user-select: none; /* منع تحديد النص */
+    -webkit-user-select: none; /* للمتصفحات المبنية على WebKit */
+    -moz-user-select: none; /* لمتصفح Firefox */
+    -ms-user-select: none; /* لمتصفح Edge */
+     }
 
         .menu-toggle {
             display: block; /* اجعلها مرئية */
@@ -581,7 +579,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     let textElement = document.querySelector(".moving-text");
     let index = 0;
-
+    let text = "Welcome to Interpol 🙂";
     function typeEffect() {
         textElement.innerHTML = text.substring(0, index) + "<span class='red-text'>|</span>";
         index++;
@@ -594,7 +592,23 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(typeEffect, 150);
 });
 
-    setInterval(typeEffect, 150);
+    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("copy", function (e) {
+        e.preventDefault();
+        alert("🚫 لا يمكنك نسخ النص من هذا الموقع!");
+    });
+
+    document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        alert("🚫 تم تعطيل زر الفأرة الأيمن!");
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && (e.key === "c" || e.key === "x" || e.key === "v")) {
+            e.preventDefault();
+            alert("🚫 اختصارات النسخ واللصق معطلة!");
+        }
+    });
 });
 
     </script>
