@@ -242,6 +242,16 @@
             display: none; /* إخفاء العنصر بشكل افتراضي */
         }
 
+        .mobile-logo {
+            display: none; /* إخفاء الصورة في الوضع العادي */
+            width: 150px; /* حجم الصورة */
+            height: auto; /* الحفاظ على تناسب الأبعاد */
+            position: absolute;
+            top: 10px; /* تحديد المسافة من الأعلى */
+            left: 50%; /* وضعها في منتصف الصفحة */
+            transform: translateX(-50%); /* جعلها بالضبط في المنتصف */
+        }
+
         .mobile-nav {
             display: none;
             position: absolute;
@@ -288,6 +298,10 @@
 
           .logo {
                 display: none;
+           }
+
+          .mobile-logo {
+                display: block; /* إظهار الصورة في الهاتف */
            }
             
            nav {
