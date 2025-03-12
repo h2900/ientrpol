@@ -268,6 +268,23 @@
             color: #0400dc;
         }
 
+        .container {
+    display: flex;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.section {
+    min-width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+}
+
         .menu-toggle {
             display: block; /* اجعلها مرئية */
             font-size: 25px; /* ضبط الحجم ليكون مناسباً */
@@ -534,46 +551,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     let video = document.getElementById("videoElement");
-    let canvas = document.getElementById("thumbnailCanvas");
-    let img = document.getElementById("thumbnail");
+    document.addEventListener("DOMContentLoaded", function () {
+    let startX = 0;
+    let currentIndex = 0;
+    const sections = document.querySelectorAll(".section"); // غيرها حسب هيكلة موقعك
 
-    video.addEventListener("loadeddata", function () {
-        let ctx = canvas.getContext("2d");
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        video.currentTime = 2; // استخراج الصورة من الثانية 2
-    });
-
-    video.addEventListener("seeked", function () {
-        let ctx = canvas.getContext("2d");
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        img.src = canvas.toDataURL("image/png"); // تحويل الصورة إلى رابط وعرضها
-    });
-
-document.addEventListener("DOMContentLoaded", function () {
-    let fullscreenContainer = document.createElement("div");
-    fullscreenContainer.classList.add("fullscreen");
-    fullscreenContainer.innerHTML = '<video controls></video>';
-    document.body.appendChild(fullscreenContainer);
-
-    let fullscreenVideo = fullscreenContainer.querySelector("video");
-
-    document.querySelectorAll(".video-thumbnail").forEach(video => {
-        video.addEventListener("click", function () {
-            fullscreenVideo.src = this.getAttribute("data-video");
-            fullscreenContainer.style.display = "flex";
+    function showSection(index) {
+        if (index < 0) index = 0;
+        if (index >= sections.length) index = sections.length - 1;
+        sections.forEach((section, i) => {
+            section.style.transform = `translateX(${(i - index) * 100}%)`;
         });
+        currentIndex = index;
+    }
+
+    document.addEventListener("touchstart", function (e) {
+        startX = e.touches[0].clientX;
     });
 
-    fullscreenContainer.addEventListener("click", function (e) {
-        if (e.target === fullscreenContainer) {
-            fullscreenContainer.style.display = "none";
-            fullscreenVideo.pause();
+    document.addEventListener("touchmove", function (e) {
+        let diffX = e.touches[0].clientX - startX;
+        if (diffX > 50) {
+            showSection(currentIndex - 1); // سحب لليمين
+        } else if (diffX < -50) {
+            showSection(currentIndex + 1); // سحب لليسار
         }
     });
+
+    // تأكد من بدء العرض من القسم الأول
+    showSection(currentIndex);
 });
-
-
 
     </script>
 </body>
