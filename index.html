@@ -279,31 +279,6 @@
     white-space: nowrap;
 }
 
-.moving-text {
-    display: inline-block;
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    position: relative;
-    animation: moveText 5s linear infinite alternate;
-    animation-delay: 2s; /* تأخير البداية بـ 2 ثانية */
-}
-}
-
-.red-text {
-    color: #0400dc;
-    font-style: italic;
-}
-
-@keyframes moveText {
-    from {
-        transform: translateX(-20px);
-    }
-    to {
-        transform: translateX(20px);
-    }
-}
-
      body {
     user-select: none; /* منع تحديد النص */
     -webkit-user-select: none; /* للمتصفحات المبنية على WebKit */
@@ -362,6 +337,19 @@
         .mobile-nav button:hover {
             background: #0400dc;
         }
+
+        .text-container {
+            position: relative;
+            font-weight: bold;
+            border-right: 3px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+            width: fit-content;
+            display: inline-block;
+            font-size: 30px;
+            color: white;
+        }
+
 
      .wnasatime-section {
     background-color: #111;
@@ -469,6 +457,8 @@
 
                 
                 <h1>MAIN</h1>
+
+               <div class="text-container"></div>
                 
                 <div class="card-container">
                     <div class="card">
@@ -604,19 +594,39 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    let textElement = document.querySelector(".moving-text");
-    let index = 0;
-    let text = "Welcome to Interpol 🙂";
-    function typeEffect() {
-        textElement.innerHTML = text.substring(0, index) + "<span class='red-text'>|</span>";
-        index++;
+    const texts = [
+        "مرحبا بكم في Interpol Aflou",
+        "مصدر الأخبار الموثوقة",
+        "تابعونا لمعرفة كل جديد"
+    ];
 
-        if (index > text.length) {
-            index = 0;
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    // حدد العنصر الذي تريد أن يظهر فيه النص (مثلاً داخل الهيدر)
+    const textElement = document.querySelector(".text-container");
+
+    function typeEffect() {
+        let currentText = texts[textIndex];
+
+        if (isDeleting) {
+            textElement.textContent = currentText.substring(0, charIndex--);
+        } else {
+            textElement.textContent = currentText.substring(0, charIndex++);
         }
+
+        if (!isDeleting && charIndex === currentText.length) {
+            setTimeout(() => isDeleting = true, 1500); 
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+        }
+
+        setTimeout(typeEffect, isDeleting ? 50 : 100);
     }
 
-    setInterval(typeEffect, 150);
+    typeEffect();
 });
 
     document.addEventListener("DOMContentLoaded", function () {
