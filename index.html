@@ -270,19 +270,21 @@
         }
 
      .moving-text-container {
+    t.moving-text-container {
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    height: 60px; /* تأكد أن المساحة كافية للنص */
 }
 
 .moving-text {
     display: inline-block;
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    position: relative;
-    animation: moveText 5s linear infinite alternate;
-}
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+         }
 
 .red-text {
     color: #0400dc;
