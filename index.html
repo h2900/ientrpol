@@ -196,6 +196,43 @@
             font-weight: bold;
         }
 
+/* شاشة العرض الكاملة للصورة والفيديو */
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    display: none; /* إخفاؤه في البداية */
+}
+
+/* الفيديو المكبر */
+.fullscreen video {
+    width: 90%;
+    height: auto;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* زر الإغلاق */
+.fullscreen::after {
+    content: "✖";
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
         footer {
             display: flex;
             flex-wrap: wrap; /* السماح للعناصر بالتفاف في حال الحاجة */
@@ -505,6 +542,31 @@ document.addEventListener("DOMContentLoaded", function () {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         img.src = canvas.toDataURL("image/png"); // تحويل الصورة إلى رابط وعرضها
     });
+
+document.addEventListener("DOMContentLoaded", function () {
+    let fullscreenContainer = document.createElement("div");
+    fullscreenContainer.classList.add("fullscreen");
+    fullscreenContainer.innerHTML = '<video controls></video>';
+    document.body.appendChild(fullscreenContainer);
+
+    let fullscreenVideo = fullscreenContainer.querySelector("video");
+
+    document.querySelectorAll(".video-thumbnail").forEach(video => {
+        video.addEventListener("click", function () {
+            fullscreenVideo.src = this.getAttribute("data-video");
+            fullscreenContainer.style.display = "flex";
+        });
+    });
+
+    fullscreenContainer.addEventListener("click", function (e) {
+        if (e.target === fullscreenContainer) {
+            fullscreenContainer.style.display = "none";
+            fullscreenVideo.pause();
+        }
+    });
+});
+
+
 
     </script>
 </body>
