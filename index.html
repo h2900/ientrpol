@@ -489,6 +489,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+    let video = document.getElementById("videoElement");
+    let canvas = document.getElementById("thumbnailCanvas");
+    let img = document.getElementById("thumbnail");
+
+    video.addEventListener("loadeddata", function () {
+        let ctx = canvas.getContext("2d");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        video.currentTime = 2; // استخراج الصورة من الثانية 2
+    });
+
+    video.addEventListener("seeked", function () {
+        let ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        img.src = canvas.toDataURL("image/png"); // تحويل الصورة إلى رابط وعرضها
+    });
+
     </script>
 </body>
 </html>
