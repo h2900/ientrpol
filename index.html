@@ -242,15 +242,17 @@
             display: none; /* إخفاء العنصر بشكل افتراضي */
         }
 
-        .mobile-logo {
-            display: none; /* إخفاء الصورة في الوضع العادي */
-            width: 150px; /* حجم الصورة */
-            height: auto; /* الحفاظ على تناسب الأبعاد */
-            position: absolute;
-            top: 10px; /* تحديد المسافة من الأعلى */
-            left: 50%; /* وضعها في منتصف الصفحة */
-            transform: translateX(-50%); /* جعلها بالضبط في المنتصف */
-        }
+.mobile-logo {
+    display: none; /* إخفاء الصورة في الوضع العادي */
+    width: 180px; /* تكبير حجم اللوغو */
+    height: auto; /* الحفاظ على تناسب الأبعاد */
+    position: absolute;
+    top: 50px; /* إنزاله قليلًا حتى لا يكون ملاصقًا للهيدر */
+    left: 50%; /* وضعه في منتصف الشاشة */
+    transform: translateX(-50%); /* التأكد أنه في المنتصف تمامًا */
+    z-index: 1000; /* وضعه فوق العناصر الأخرى */
+}
+
 
         .mobile-nav {
             display: none;
@@ -301,7 +303,7 @@
            }
 
           .mobile-logo {
-                display: block; /* إظهار الصورة في الهاتف */
+                display: block;
            }
             
            nav {
