@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interpol</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <<div class="moving-text-container">
-    <h1 class="moving-text">طور الموقع بواسطة h29 </h1>
-     <h1 class="moving-text">لتواصل عبر ديسكورد _h29. </h1>
-     
 </div>
     <style>
         body {
@@ -281,7 +277,7 @@
 
 .moving-text {
     display: inline-block;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     color: white;
     position: relative;
@@ -572,15 +568,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
      document.addEventListener("DOMContentLoaded", function () {
     let textElement = document.querySelector(".moving-text");
+    
+    // قائمة الجمل التي راح تظهر
+    let sentences = [
+        "Welcome back",
+        "developer by H29",
+        "discord: _h29.",
+        "instagram: omg.h29"
+    ];
+
     let index = 0;
 
-    function typeEffect() {
-        textElement.innerHTML = text.substring(0, index) + "<span class='red-text'>|</span>";
-        index++;
+    function showText() {
+        textElement.style.opacity = 0; // اخفاء النص الحالي
+        setTimeout(() => {
+            textElement.textContent = sentences[index]; // تغيير النص
+            textElement.style.opacity = 1; // إظهاره
+            index = (index + 1) % sentences.length; // الانتقال إلى الجملة التالية
+        }, 500); // مدة الإخفاء قبل التغيير
+    }
 
-        if (index > text.length) {
-            index = 0;
-        }
+    showText(); // عرض أول جملة مباشرة
+    setInterval(showText, 3000); // تغيير النص كل 3 ثوانٍ
+});
+
     }
 
     setInterval(typeEffect, 150);
