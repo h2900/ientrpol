@@ -578,7 +578,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    let textElement = document.querySelector(".moving-text");
+    let index = 0;
 
+    function typeEffect() {
+        textElement.innerHTML = text.substring(0, index) + "<span class='red-text'>|</span>";
+        index++;
+
+        if (index > text.length) {
+            index = 0;
+        }
+    }
+
+    setInterval(typeEffect, 150);
+});
 
     setInterval(typeEffect, 150);
 });
