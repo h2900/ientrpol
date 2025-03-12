@@ -172,9 +172,10 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
+            display: none; /* إخفاؤه في البداية */
         }
 
-        /* الصورة المكبرة */
+/* الصورة المكبرة */
         .fullscreen img {
             width: 90%;
             height: auto;
@@ -183,7 +184,7 @@
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
         }
 
-        /* زر الإغلاق */
+/* زر الإغلاق */
         .fullscreen::after {
             content: "✖";
             position: absolute;
