@@ -56,6 +56,11 @@
         .logo:hover {
             transform: scale(1.1);
         }
+       
+          .logo {
+    content: url('iii_cleaned.png'); /* تغيير الشعار بسهولة */
+        }
+
 
         nav {
             display: flex;
@@ -238,22 +243,48 @@
 }
 
 
-        footer {
-            display: flex;
-            flex-wrap: wrap; /* السماح للعناصر بالتفاف في حال الحاجة */
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(34, 34, 34, 0.8);
-            padding-top: 80px
-            color: #0400dc;
-            text-align: center;
-            padding: 15px 20px;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 10px #0400dc;
-       }
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #111; /* لون الخلفية */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+footer .logo {
+    width: 150px; /* حجم الشعار */
+    height: auto;
+    margin-bottom: 10px;
+}
+
+footer .social-icons {
+    margin: 10px 0;
+}
+
+footer .social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+footer .social-icons img {
+    width: 30px; /* حجم أيقونات السوشيال */
+    height: auto;
+    transition: 0.3s;
+}
+
+footer .social-icons img:hover {
+    opacity: 0.7;
+}
+
+footer p {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
                 }
 
         .social-icons {
