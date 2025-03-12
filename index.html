@@ -78,11 +78,23 @@
             opacity: 1; 
         }
 
-        h1, h2, h3 {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            z-index: 1000; 
+        h1 {
+           text-align: center;  /* يوسّط العنوان */
+           color: #fff; /* لون أبيض مع شفافية 90% */
+           z-index: 1000; /* يجعله فوق العناصر الأخرى */
         }
+
+       h2 {
+           text-align: left; /* محاذاة لليسار */
+           color: #fff /* لون أزرق فاتح مع شفافية 80% */
+           z-index: 1000;
+       }
+
+       h3 {
+           text-align: right; /* محاذاة لليمين */
+           color: #fff /* لون وردي فاتح مع شفافية 80% */
+           z-index: 1000;
+       }
 
          .card-container {
             display: flex;
