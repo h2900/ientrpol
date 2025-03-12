@@ -532,22 +532,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-    let video = document.getElementById("videoElement");
-    document.addEventListener("DOMContentLoaded", function () {
-    let startX = 0;
-    let currentIndex = 0;
-    const sections = document.querySelectorAll(".section"); // غيرها حسب هيكلة موقعك
-
-    function showSection(index) {
-        if (index < 0) index = 0;
-        if (index >= sections.length) index = sections.length - 1;
-        sections.forEach((section, i) => {
-            section.style.transform = `translateX(${(i - index) * 100}%)`;
-        });
-        currentIndex = index;
-    }
-
     </script>
 </body>
 </html>
