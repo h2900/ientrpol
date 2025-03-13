@@ -720,28 +720,6 @@ footer::before {
         }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // إنشاء عنصر العرض الكامل وإضافته إلى الصفحة
-    const fullscreenDiv = document.createElement("div");
-    fullscreenDiv.classList.add("fullscreen");
-    document.body.appendChild(fullscreenDiv);
-
-    // عند النقر على أي صورة داخل .card
-    document.querySelectorAll(".card img").forEach(img => {
-        img.addEventListener("click", function () {
-            fullscreenDiv.innerHTML = `<img src="${this.src}" alt="صورة مكبرة">`;
-            fullscreenDiv.style.display = "flex";
-        });
-    });
-
-    // عند النقر خارج الصورة أو على زر الإغلاق
-    fullscreenDiv.addEventListener("click", function (event) {
-        if (event.target !== fullscreenDiv.querySelector("img")) {
-            fullscreenDiv.style.display = "none";
-        }
-    });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
     const texts = [
         "مرحبا بكم في Interpol Aflou",
         "مصدر الأخبار الموثوقة",
