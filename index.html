@@ -165,6 +165,54 @@
             box-shadow: 0 4px 15px #0400dc;
         }
 
+        /* نمط الكرت */
+.video-card {
+    width: 300px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+    transform: scale(1.05);
+}
+
+/* الغطاء الخلفي (لتضبيب الخلفية عند فتح الفيديو) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+/* الفيديو بوضع ملء الشاشة */
+.fullscreen-video {
+    width: 90%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* زر إغلاق الفيديو */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+        
+
         /* شاشة العرض الكاملة للصورة */
         .fullscreen {
             position: fixed;
@@ -564,12 +612,10 @@ footer::before {
             <h1>VIDEOS</h1>
             <div class="card-container" id="videoContainer">
                 <!-- بطاقات الفيديو -->
-                <div class="card">
-                    <a href="cj grov stret.mp4" target="_blank">
-                        <img src="vedio1.png" alt="فيديو 1">
-                        <p class="card-title"></p>
-                    </a>
-                </div>
+                <div class="overlay">
+    <span class="close-btn">&times;</span>
+    <video class="fullscreen-video" src="cj grov stret.mp4" controls></video>
+</div>
           
             </div>
         </section>
@@ -693,6 +739,64 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const videoCard = document.querySelector(".video-card");
+    const overlay = document.querySelector(".overlay");
+    const fullscreenVideo = document.querySelector(".fullscreen-video");
+    const closeButton = document.querySelector(".close-btn");
+    const thumbnail = document.querySelector(".video-thumbnail");
+
+    // استخراج صورة مصغرة من الفيديو
+    function generateThumbnail(videoElement, imgElement) {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        videoElement.addEventListener("loadeddata", function () {
+            canvas.width = 300;
+            canvas.height = (videoElement.videoHeight / videoElement.videoWidth) * 300;
+
+            videoElement.currentTime = 3; // التقاط لقطة من الثانية 3
+
+            videoElement.addEventListener("seeked", function () {
+                ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                imgElement.src = canvas.toDataURL("image/png"); // تحويل اللقطة إلى صورة
+            });
+        });
+    }
+
+    // تحميل الصورة المصغرة تلقائيًا
+    const tempVideo = document.createElement("video");
+    tempVideo.src = "video.mp4";
+    tempVideo.crossOrigin = "anonymous";
+    generateThumbnail(tempVideo, thumbnail);
+
+    // تشغيل الفيديو عند الضغط على الصورة المصغرة أو كرت الفيديو
+    function openVideo() {
+        overlay.style.opacity = "1";
+        overlay.style.visibility = "visible";
+        fullscreenVideo.play();
+    }
+
+    thumbnail.addEventListener("click", openVideo);
+    videoCard.addEventListener("click", openVideo);
+
+    // إغلاق الفيديو عند الضغط على زر الإغلاق أو خارج الفيديو
+    function closeVideo() {
+        overlay.style.opacity = "0";
+        overlay.style.visibility = "hidden";
+        fullscreenVideo.pause();
+        fullscreenVideo.currentTime = 0;
+    }
+
+    closeButton.addEventListener("click", closeVideo);
+    overlay.addEventListener("click", function (event) {
+        if (event.target === overlay) {
+            closeVideo();
+        }
+    });
+});
+
 
     </script>
 </body>
