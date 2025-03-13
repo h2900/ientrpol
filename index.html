@@ -108,6 +108,7 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    align-items: stretch;
 }
 
 .card {
@@ -120,6 +121,7 @@
     box-shadow: 0 2px 8px #0400dc;
     text-align: center;
     cursor: pointer;
+    max-width: 100%;
 }
 
 .card img {
@@ -128,6 +130,7 @@
     border-radius: 15px 15px 0 0;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    object-fit: cover;
 }
 
 .card:hover {
@@ -512,8 +515,8 @@ footer::before {
             }
 
             .card {
-                width: 90%;
-            }
+        width: 100%; /* يجعل البطاقات تأخذ كامل عرض الشاشة على الهاتف */
+    }
 
             footer {
                 flex-direction: column;
@@ -535,11 +538,6 @@ footer::before {
                 background-position: center;
                 background-repeat: no-repeat;
             }
-  
-           .card {
-               width: calc(50% - 20px);
-             }
-
         }
     </style>
 </head>
