@@ -138,56 +138,6 @@
     box-shadow: 0 4px 15px #0400dc;
 }
 
-/* ✅ تصميم نافذة عرض الصورة */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s;
-}
-
-.overlay.active {
-    visibility: visible;
-    opacity: 1;
-}
-
-.overlay img {
-    max-width: 90%;
-    max-height: 80%;
-    border-radius: 15px;
-}
-
-/* ✅ أزرار التحكم */
-.close-btn, .prev-btn, .next-btn, .fullscreen-btn {
-    position: absolute;
-    background: #0400dc;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: 0.3s;
-    z-index: 1000;
-}
-
-.close-btn { top: 50px; right: 20px; }
-.prev-btn { left: 20px; }
-.next-btn { right: 20px; }
-.fullscreen-btn { bottom: 20px; right: 20px; }
-
-.close-btn:hover, .prev-btn:hover, .next-btn:hover, .fullscreen-btn:hover {
-    background: #ff0000;
-}
-
 
         /* نمط الكرت */
 .video-card {
@@ -855,77 +805,6 @@ document.addEventListener("DOMContentLoaded", function () {
             openGallery(index);
         });
     });
-
-    // فتح المعرض وعرض الصورة المحددة
-    function openGallery(index) {
-        currentIndex = index;
-        galleryImage.src = images[currentIndex];
-        overlay.classList.add("active");
-    }
-
-    // إغلاق المعرض
-    function closeGallery() {
-        overlay.classList.remove("active");
-    }
-
-    // الانتقال للصورة التالية
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        galleryImage.src = images[currentIndex];
-    }
-
-    // الرجوع للصورة السابقة
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        galleryImage.src = images[currentIndex];
-    }
-
-    // تفعيل/إلغاء ملء الشاشة
-    function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            galleryImage.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
-    }
-
-    // إضافة الأحداث للأزرار
-    closeButton.addEventListener("click", closeGallery);
-    nextButton.addEventListener("click", nextImage);
-    prevButton.addEventListener("click", prevImage);
-    fullscreenButton.addEventListener("click", toggleFullScreen);
-
-    // إغلاق المعرض عند الضغط خارج الصورة
-    overlay.addEventListener("click", function (event) {
-        if (event.target === overlay) {
-            closeGallery();
-        }
-    });
-
-    // دعم التنقل عبر **لوحة المفاتيح**
-    document.addEventListener("keydown", function (event) {
-        if (overlay.classList.contains("active")) {
-            if (event.key === "ArrowRight") nextImage();
-            if (event.key === "ArrowLeft") prevImage();
-            if (event.key === "Escape") closeGallery();
-        }
-    });
-
-    // دعم السحب على الهاتف (Swipe)
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    galleryImage.addEventListener("touchstart", function (event) {
-        touchStartX = event.changedTouches[0].screenX;
-    });
-
-    galleryImage.addEventListener("touchend", function (event) {
-        touchEndX = event.changedTouches[0].screenX;
-        if (touchStartX - touchEndX > 50) nextImage(); // سحب لليسار = صورة جديدة
-        if (touchEndX - touchStartX > 50) prevImage(); // سحب لليمين = صورة قديمة
-    });
-});
-
 
 
     </script>
