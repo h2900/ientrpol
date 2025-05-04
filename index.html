@@ -447,20 +447,47 @@ footer::before {
             background: #0400dc;
         }
 
-        .text-container {
-            position: relative;
-            font-weight: bold;
-            transform: translate(-50%, -50%);
-            left: 50%; /* تحديد الموضع الأفقي */
-            border-right: 3px solid white;
-            white-space: nowrap;
-            overflow: hidden;
-            width: fit-content;
-            display: inline-block;
-            font-size: 30px;
-            color: white;
-            text-align: center;
-        }
+.centered-text-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    white-space: nowrap;
+    display: inline-block;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+    animation: fadeIn 1s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 
 
      .wnasatime-section {
@@ -725,10 +752,33 @@ footer::before {
 
 document.addEventListener("DOMContentLoaded", function () {
     const texts = [
-        "Interpol Aflou مرحبا بكم في",
+        "مرحبا بكم في Interpol Aflou",
         "مصدر الأخبار الموثوقة",
         "تابعونا لمعرفة كل جديد"
     ];
+
+    let textIndex = 0;
+    const textElement = document.getElementById("centeredText");
+
+    // دالة لتغيير النص
+    function changeText() {
+        textElement.classList.add('fade-out'); // إضافة كلاس التلاشي
+
+        setTimeout(function() {
+            textElement.innerHTML = texts[textIndex];
+            textElement.classList.remove('fade-out'); // إزالة التلاشي بعد التغيير
+            textElement.classList.add('fade-in'); // إضافة كلاس الظهور
+            textIndex = (textIndex + 1) % texts.length; // الانتقال إلى النص التالي
+        }, 500); // تأخير 500ms قبل تغيير النص
+    }
+
+    // تغيير النص كل 4 ثواني
+    setInterval(changeText, 4000);
+
+    // بدء عرض النص الأول
+    changeText();
+});
+
 
 
 
