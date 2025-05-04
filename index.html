@@ -46,9 +46,8 @@
          }
 
         .logo {
-            left: 0;
-            height: 50px;
-            width: 50px;
+            height: 40px;
+            width: 40px;
             border-radius: 50%;
             cursor: pointer;
             transition: transform 0.5s;
@@ -137,6 +136,56 @@
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px #0400dc;
+}
+
+/* ✅ تصميم نافذة عرض الصورة */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.overlay img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 15px;
+}
+
+/* ✅ أزرار التحكم */
+.close-btn, .prev-btn, .next-btn, .fullscreen-btn {
+    position: absolute;
+    background: #0400dc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.close-btn { top: 20px; right: 20px; }
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+.fullscreen-btn { bottom: 20px; right: 20px; }
+
+.close-btn:hover, .prev-btn:hover, .next-btn:hover, .fullscreen-btn:hover {
+    background: #ff0000;
 }
 
 
@@ -353,7 +402,7 @@ footer::before {
             position: fixed; /* تثبيتها في الزاوية */
             top: 11px; /* تحديد المسافة من الأعلى */
             right: 30px; /* تحديد المسافة من اليمين */
-            z-index: 9999; /* جعلها فوق باقي العناصر */
+            z-index: 1000; /* جعلها فوق باقي العناصر */
             background: none; /* إضافة خلفية */
             padding: 10px; /* تحسين المظهر */
             display: none; /* إخفاء العنصر بشكل افتراضي */
@@ -548,14 +597,14 @@ footer::before {
                     </div>
 
                  <div class="wnasatime-section">
-    <p> <h2><span>Interpol</span> Aflou | مصدرك الأول للأخبار الدقيقة</h2> </p>
-    <p><strong>Interpol Aflou</strong> هي صفحة إخبارية متخصصة في نقل الأخبار المحلية، الوطنية والدولية بدقة وموضوعية. نلتزم بتقديم محتوى موثوق، سريع، واحترافي، مع التركيز على تغطية الأحداث المهمة، التحليلات العميقة، والتقارير الحصرية التي تضع المتابع في قلب الحدث.</p>
+    <h2>Interpol Aflou | مصدرك الأول للأخبار الدقيقة</h2>
+    <p>Interpol Aflou هي صفحة إخبارية متخصصة في نقل الأخبار المحلية، الوطنية والدولية بدقة وموضوعية. نلتزم بتقديم محتوى موثوق، سريع، واحترافي، مع التركيز على تغطية الأحداث المهمة، التحليلات العميقة، والتقارير الحصرية التي تضع المتابع في قلب الحدث.
 
-    <p><span>📌 مهمتنا:</span> تقديم الأخبار بمصداقية تامة، مع احترام أخلاقيات الصحافة ونقل المعلومات بموضوعية تامة.</p>
+📌 مهمتنا: تقديم الأخبار بمصداقية تامة، مع احترام أخلاقيات الصحافة ونقل المعلومات بموضوعية تامة.
+📌 رؤيتنا: أن نكون المصدر الإخباري الأول الذي يعتمد عليه المتابعون للحصول على المعلومات الدقيقة والموثوقة.
+📌 مجالات التغطية: السياسة، الأمن، الاقتصاد، الرياضة، التكنولوجيا، والمستجدات العامة على الصعيدين المحلي والدولي.
 
-    <p><span>📌 رؤيتنا:</span> أن نكون المصدر الإخباري الأول الذي يعتمد عليه المتابعون للحصول على المعلومات الدقيقة والموثوقة.</p>
-
-    <p><span>📌 مجالات التغطية:</span> السياسة، الأمن، الاقتصاد، الرياضة، التكنولوجيا، والمستجدات العامة على الصعيدين المحلي والدولي.</p>
+تابعونا لتبقوا على اطلاع دائم بكل جديد! 📲✨</p>
                  </div>
 
                 </div>
@@ -593,11 +642,6 @@ footer::before {
                     <img src="Interpol Aflou.png" alt="خبر 1">
                     <p class="card-title">Picasso Web📉</p>
                 </div>
-
-                <div class="card">
-                    <img src="Mclaren_P-1_2019_1.png" alt="خبر 1">
-                    <p class="card-title">مزاد mclaren</p>
-                 </div>
                 
             </div>
         </section>
@@ -806,6 +850,77 @@ document.addEventListener("DOMContentLoaded", function () {
             openGallery(index);
         });
     });
+
+    // فتح المعرض وعرض الصورة المحددة
+    function openGallery(index) {
+        currentIndex = index;
+        galleryImage.src = images[currentIndex];
+        overlay.classList.add("active");
+    }
+
+    // إغلاق المعرض
+    function closeGallery() {
+        overlay.classList.remove("active");
+    }
+
+    // الانتقال للصورة التالية
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        galleryImage.src = images[currentIndex];
+    }
+
+    // الرجوع للصورة السابقة
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        galleryImage.src = images[currentIndex];
+    }
+
+    // تفعيل/إلغاء ملء الشاشة
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            galleryImage.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    // إضافة الأحداث للأزرار
+    closeButton.addEventListener("click", closeGallery);
+    nextButton.addEventListener("click", nextImage);
+    prevButton.addEventListener("click", prevImage);
+    fullscreenButton.addEventListener("click", toggleFullScreen);
+
+    // إغلاق المعرض عند الضغط خارج الصورة
+    overlay.addEventListener("click", function (event) {
+        if (event.target === overlay) {
+            closeGallery();
+        }
+    });
+
+    // دعم التنقل عبر **لوحة المفاتيح**
+    document.addEventListener("keydown", function (event) {
+        if (overlay.classList.contains("active")) {
+            if (event.key === "ArrowRight") nextImage();
+            if (event.key === "ArrowLeft") prevImage();
+            if (event.key === "Escape") closeGallery();
+        }
+    });
+
+    // دعم السحب على الهاتف (Swipe)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    galleryImage.addEventListener("touchstart", function (event) {
+        touchStartX = event.changedTouches[0].screenX;
+    });
+
+    galleryImage.addEventListener("touchend", function (event) {
+        touchEndX = event.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) nextImage(); // سحب لليسار = صورة جديدة
+        if (touchEndX - touchStartX > 50) prevImage(); // سحب لليمين = صورة قديمة
+    });
+});
+
 
 
     </script>
